@@ -1,4 +1,5 @@
-# jd
-环境：使用scrapy爬取+mongodb进行数据的存储
+# jd_spider
+环境：使用scrapy1.6爬取+mongodb进行数据的存储
 访问京东首页，获取分类信息，分析页面 发现京东有些网站的url子域名并不都是一样,故针对不一样的分类，逐一发送请求爬取京东的商品信息
+get_jd_category.py文件可获取京东分类的信息保存在本地mongodb数据库中，根据自己想爬取分类需求跟换scrapy中的start_url来爬取不同分类产品信息
 
