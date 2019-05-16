@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from urllib.parse import urljoin
 import re
 from ..items import JingdongItem
 
@@ -8,6 +7,9 @@ from ..items import JingdongItem
 class JdSpider(scrapy.Spider):
     name = 'jd'
     allowed_domains = ['jd.com']
+    # 对京东首页抓包进行分析,部分分类商品对应的url域名网页格式并不相同,故需要对每个小分类分别进行请求
+    # 商品分类信息在"https://dc.3.cn/category/get"响应的json字符串中
+    # 如下: 737,794,798为其中的电视机分类
     start_urls = ['https://list.jd.com/list.html?cat=737,794,798']
 
     def parse(self, response):
@@ -47,5 +49,4 @@ class JdSpider(scrapy.Spider):
         item = response.meta["item"]
         data = response.body.decode("gbk")
         item["price"] = re.findall(r"wMaprice\":(\d+)", data)
-        # print(item)
         yield item

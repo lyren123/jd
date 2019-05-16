@@ -8,7 +8,7 @@ from pymongo import MongoClient
 
 
 client = MongoClient()
-collections = client["jd"]['cate1']
+collections = client["jd"]['cate2']
 
 class JingdongPipeline(object):
     def process_item(self, item, spider):
@@ -19,5 +19,6 @@ class JingdongPipeline(object):
         item["desc"] = "".join([i.strip() for i in item["desc"]])
         item = dict(item)
         collections.insert_one(item)
+        # 控制台打印爬取数据,方便观察爬取状态
         print(item)
         return item
